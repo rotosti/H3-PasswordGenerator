@@ -13,73 +13,97 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
+
 function generatePassword() {
 
-    var characterAmount = 0;
-    var lowerCharactersSelected = false;
-    var upperCharactersSelected = false;
-    var numbersSelected = false;
-    var specialCharactersSelected = false;
-    //var continueSelection = true;
+    var continueGeneratingPassword = true;
 
-    var lowerCaseCharacters = "abcdefghijklmnopqrstuvwxyz";
-    var upperCaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var numberCharacters = "0123456789";
-    var specialCharacters = "!@#%^&*()";
+    // amount of character selection
+    var characterAmount = prompt("How many characters do you want in your password?");
 
-    characterAmount = prompt("How many characters do you want in your password?")
+    while ((characterAmount < 8 || characterAmount > 128) ) {
+        continueGeneratingPassword = confirm("Only between 8-128 characters allowed. Would " +
+                                              "you like to continue generating a password?");
 
-    while (characterAmount < 8 || characterAmount > 128) {
-        alert("Only between 8-128 characters allowed.")
+        if (!continueGeneratingPassword) {
+            return "User cancelled password generation process."
+        }
+
         characterAmount = prompt("How many characters do you want in your password?");
     }
 
-    lowerCharactersSelected = confirm("Do you want lower case characters?");
+    // type of character selection
+    var lowerCharactersSelected = confirm("Do you want lower case characters?");
+    var upperCharactersSelected = confirm("Do you want upper case character?");
+    var numbersSelected = confirm("Do you want numbers?");
+    var specialCharactersSelected = confirm("Do you want special characters?");
 
-    upperCharactersSelected = confirm("Do you want upper case character?");
+    while (!lowerCharactersSelected && !upperCharactersSelected &&
+           !numbersSelected && !specialCharactersSelected && continueGeneratingPassword) {
 
-    numbersSelected = confirm("Do you want numbers?");
+        continueGeneratingPassword = confirm("You must pick at least one type of character to " +
+                                             "generate password. Continue generating password?");
+        
+        if (!continueGeneratingPassword) {
+            return "User cancelled password generation process.";
+        }
 
-    specialCharactersSelected = confirm("Do you want special characters?");
+        lowerCharactersSelected = confirm("Do you want lower case characters?");
+        upperCharactersSelected = confirm("Do you want upper case character?");
+        numbersSelected = confirm("Do you want numbers?");
+        specialCharactersSelected = confirm("Do you want special characters?");     
+    }
 
-    // if (!lowerCharactersSelected && !upperCharactersSelected && !numbersSelected && !specialCharactersSelected) {
-      
-    // }
-    var characterSelection = ""; // user selected characters to choose from
-    var generatedPassword = ""; // what i am returning back to the function caller
+    // password generation
+    var userCharacterPool = "";
 
     if (lowerCharactersSelected) {
-      characterSelection += lowerCaseCharacters; // characterSelection = characterSelection + lowerCaseCharacters;
+        userCharacterPool += "abcdefghijklmnopqrstuvwxyz";
     }
     if (upperCharactersSelected) {
-      characterSelection += upperCaseCharacters;
+        userCharacterPool += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
     if (numbersSelected) {
-      characterSelection += numberCharacters;
+        userCharacterPool += "0123456789";
     }
     if (specialCharactersSelected) {
-      characterSelection += specialCharacters;
+        userCharacterPool += "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
     }
 
-    for (var i = 0; i < characterAmount; i++ ) {
-      var index = Math.floor(Math.random() * (characterSelection.length - 0) + 0);
-      generatedPassword += characterSelection[index];
+    var generatedPassword;
+    var passwordValidation = false;
+
+    while (!passwordValidation) {
+
+        generatedPassword = "";
+
+        for (var i = 0; i < characterAmount; i++ ) {
+            var index = Math.floor(Math.random() * (userCharacterPool.length - 0) + 0);
+            generatedPassword += userCharacterPool[index];
+        }
+
+        if (lowerCharactersSelected && !/[a-z]/.test(generatedPassword)) {
+            passwordValidation = false;
+            console.log("missing lower case letter. REMAKING")
+        } else if (upperCharactersSelected && !/[A-Z]/.test(generatedPassword)) {
+            passwordValidation = false;
+            console.log("missing upper case letter. REMAKING")
+        } else if (numbersSelected && !/[0-9]/.test(generatedPassword)) {
+            passwordValidation = false;
+            console.log("missing numbers REMAKING")
+        } else if (specialCharactersSelected && !/!-./.test(generatedPassword) && 
+                   !/:-@/.test(generatedPassword) && !/\[-'/.test(generatedPassword) && 
+                   !/{-~/.test(generatedPassword)) {            
+            passwordValidation = false;
+            console.log("missing characters REMAKING")
+        } else {
+            passwordValidation = true;
+            console.log("password has PASSED")
+        }
     }
 
     return generatedPassword;
 }
 
-FUNCTION2=MATH.FLOOR(FUNCTION1=MATH.RANDOM)
 
 
-
-
-// ask for amount characters
-// lower
-// uppercase
-// numbers
-// specialcharacters
-// if none -> do you want to continue making a password? ok -> retart cancel -> go back to homepage
-// what characters user wants
-// generate password
-// output password to user
