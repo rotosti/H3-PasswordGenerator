@@ -34,7 +34,7 @@ function generatePassword() {
         }
 
         // collects character amount again
-        characterAmount = prompt("How many characters do you want in your password?");
+        characterAmount = parseInt(prompt("How many characters do you want in your password?"));
     }
 
     // user selection of types of characters to use in password 
@@ -81,7 +81,7 @@ function generatePassword() {
     }
 
     // variable which stores final password
-    var generatedPassword;
+    var generatedPassword = "";
 
     // variable necessary to exit out of a while loop if password that is generated meets users character criteria
     var passwordValidation = false;
@@ -91,38 +91,43 @@ function generatePassword() {
     // in a for loop. randomness of characters is achieved with Math.random()
     while (!passwordValidation) {
 
-        // variable which stores generated password for validation and return
+        // reset to emptry string
         generatedPassword = "";
 
         // creates password by iterating the amount of password characters user chose and concatenating characters picked
         // at random from the character selection bank
         for (var i = 0; i < characterAmount; i++ ) {
-            var index = Math.floor(Math.random() * (userCharacterPool.length - 0) + 0);
+            var index = Math.floor(Math.random() * (userCharacterPool.length));
             generatedPassword += userCharacterPool[index];
         }
         // password validation using regex
         // verifies if user selected lower case letters and if there is at least 1 lower case letter in the generated password
         if (lowerCharactersSelected && !/[a-z]/.test(generatedPassword)) {
             passwordValidation = false;
+            console.log("missing lower characters REMAKE");
         } 
         // verifies if user selected upper case letters and if there is at least 1 upper case letter in the generated password
         else if (upperCharactersSelected && !/[A-Z]/.test(generatedPassword)) {
             passwordValidation = false;
+            console.log("missing upper characters REMAKE");
         } 
         // verifies if user selected numbers and if there is at least 1 number in the generated password
         else if (numbersSelected && !/[0-9]/.test(generatedPassword)) {
             passwordValidation = false;
+            console.log("missing numbers REMAKE");
         } 
         // verifies if user selected special characters and if there is at least 1 special character in the generated password
         else if (specialCharactersSelected && !/!-./.test(generatedPassword) && 
                    !/:-@/.test(generatedPassword) && !/\[-'/.test(generatedPassword) && 
                    !/{-~/.test(generatedPassword)) {            
             passwordValidation = false;
+            console.log("missing characters REMAKE");
         } 
         // if password is validated and has at least one of each selected character type, will allow for password
         // generation loop to end so a password can be returned back to the function caller
         else {
             passwordValidation = true;
+            console.log("PASS");
         }
     }
 
