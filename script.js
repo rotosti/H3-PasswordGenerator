@@ -19,11 +19,11 @@ function generatePassword() {
     var continueGeneratingPassword = true;
 
     // amount of character selection
-    var characterAmount = prompt("How many characters do you want in your password?");
+    var characterAmount = parseInt(prompt("How many characters do you want in your password?"));
 
-    while ((characterAmount < 8 || characterAmount > 128) ) {
-        continueGeneratingPassword = confirm("Only between 8-128 characters allowed. Would " +
-                                              "you like to continue generating a password?");
+    while (isNaN(characterAmount) || characterAmount < 8 || characterAmount > 128) {
+        continueGeneratingPassword = confirm("Invalid input. A number between 8-128 is required to continue. Would you" +
+                                             " like to continue creating a password?");
 
         if (!continueGeneratingPassword) {
             return "User cancelled password generation process."
