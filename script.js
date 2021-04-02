@@ -104,30 +104,25 @@ function generatePassword() {
         // verifies if user selected lower case letters and if there is at least 1 lower case letter in the generated password
         if (lowerCharactersSelected && !/[a-z]/.test(generatedPassword)) {
             passwordValidation = false;
-            console.log("missing lower characters REMAKE");
         } 
         // verifies if user selected upper case letters and if there is at least 1 upper case letter in the generated password
         else if (upperCharactersSelected && !/[A-Z]/.test(generatedPassword)) {
             passwordValidation = false;
-            console.log("missing upper characters REMAKE");
         } 
         // verifies if user selected numbers and if there is at least 1 number in the generated password
         else if (numbersSelected && !/[0-9]/.test(generatedPassword)) {
             passwordValidation = false;
-            console.log("missing numbers REMAKE");
         } 
         // verifies if user selected special characters and if there is at least 1 special character in the generated password
         else if (specialCharactersSelected && !/!-./.test(generatedPassword) && 
                    !/:-@/.test(generatedPassword) && !/\[-'/.test(generatedPassword) && 
                    !/{-~/.test(generatedPassword)) {            
             passwordValidation = false;
-            console.log("missing characters REMAKE");
         } 
         // if password is validated and has at least one of each selected character type, will allow for password
         // generation loop to end so a password can be returned back to the function caller
         else {
             passwordValidation = true;
-            console.log("PASS");
         }
     }
 
