@@ -1,4 +1,4 @@
-# H3-PasswordGenerator
+PasswordGenerator
 password generator project
 
 Author: Tomasz Siemion
