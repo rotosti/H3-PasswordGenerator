@@ -3,7 +3,7 @@ password generator project
 
 Author: Tomasz Siemion
 Project: Password Generator
-LINK: https://rotosti.github.io/H3-PasswordGenerator/
+LINK: https://rotosti.github.io/ThePasswordGenerator/
 
 The goal of the program is to generate a random password for the user.  The user will follow a series of dialog boxes using alert(), confirm(), and prompt().  Once the user completes the input portion a random password will be generated with the user's specifications.  The user must enter a value from 8-128 to select the amount of characters in the password.  The user will then choose if they want lower case letters, upper case letters, numbers, or special characters.  Once the user input is gathered, the password will be displayed onto the webpage in the specified text area.
 
